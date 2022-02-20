@@ -28,10 +28,12 @@ dictinory = {
 _from = input('Введите место откуда начинается путь - ')
 _to = input('Введите место куда вам нужно добраться - ')
 
-if _from in dictinory and _to in dictinory and _from != _to:
-    getPath(dictinory[_from], dictinory[_to])
-else:
-    if _from not in dictinory or not _to in dictinory:
-        print('Такого места нет в базе')
-    elif _from == _to:
-        print('Введите разные места')
+getPath(_from, _to)
+
+# if _from in dictinory and _to in dictinory and _from != _to:
+#     getPath(dictinory[_from], dictinory[_to])
+# else:
+#     if _from not in dictinory or not _to in dictinory:
+#         print('Такого места нет в базе')
+#     elif _from == _to:
+#         print('Введите разные места')
