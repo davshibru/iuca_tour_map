@@ -16,6 +16,7 @@ def draw_by_points(way):
     third_floor = Image.open('CrearMapTemplate/New-project-_3rd-floor_.jpg')
 
     privius_point = ''
+
     flag = False
 
     for i in range(len(way)):
@@ -291,5 +292,4 @@ coordinats = {
     't46': [9900, 1000],
 }
 
-#draw_by_points(['t45', 't46'])
 
