@@ -7,16 +7,13 @@ def draw_by_points(way):
 
     way_name = f'from_{first}_to_{last}'
 
-    grounnd_floor = Image.open('CrearMapTemplate/New-project-_Ground-floor_-220219154306_1.jpg')
+    grounnd_floor = Image.open('CrearMapTemplate/New-project-_Ground-floor_.jpg')
 
-    #first_floor = Image.open('Images/Prototype_First_Floor.png')
-    first_floor = Image.open('CrearMapTemplate/New-project-_1st-floor_-220219154323_1.jpg')
+    first_floor = Image.open('CrearMapTemplate/New-project-_1st-floor_.jpg')
 
-    #second_floor = Image.open('Images/Prototype_Second_Floor.png')
+    second_floor = Image.open('CrearMapTemplate/New-project-_2nd-floor.jpg')
 
-    second_floor = Image.open('CrearMapTemplate/New-project-_2nd-floor_-220219154329_1.jpg')
-
-
+    third_floor = Image.open('CrearMapTemplate/New-project-_3rd-floor_.jpg')
 
     privius_point = ''
     flag = False
@@ -29,7 +26,7 @@ def draw_by_points(way):
 
         # first floor
         if way[i][0] == 'f':
-            if privius_point == 's' or privius_point == 'g':
+            if privius_point == 's' or privius_point == 'g' or privius_point == 't':
                 flag = True
 
             draw = ImageDraw.Draw(first_floor)
@@ -37,12 +34,12 @@ def draw_by_points(way):
             # проверка на то находится ли следующая точка на другом этаже и рисовать линии не надо
 
             if i < (len(way) - 1):
-                if way[i+1][0] == 's' or way[i+1][0] == 'g':
+                if way[i+1][0] == 's' or way[i+1][0] == 'g' or way[i+1][0] == 't':
                     flag = True
 
         # second floor
         if way[i][0] == 's':
-            if privius_point == 'f' or privius_point == 'g':
+            if privius_point == 'f' or privius_point == 'g' or privius_point == 't':
                 privius_point = way[i]
                 continue
 
@@ -51,12 +48,26 @@ def draw_by_points(way):
             # проверка на то находится ли следующая точка на другом этаже и рисовать линии не надо
 
             if i < (len(way) - 1):
-                if way[i+1][0] == 'f' or way[i+1][0] == 'g':
+                if way[i+1][0] == 'f' or way[i+1][0] == 'g' or way[i+1][0] == 't':
+                    flag = True
+
+        # third floor
+        if way[i][0] == 't':
+            if privius_point == 'f' or privius_point == 'g' or privius_point == 's':
+                privius_point = way[i]
+                continue
+
+            draw = ImageDraw.Draw(third_floor)
+
+            # проверка на то находится ли следующая точка на другом этаже и рисовать линии не надо
+
+            if i < (len(way) - 1):
+                if way[i + 1][0] == 'f' or way[i + 1][0] == 'g' or way[i+1][0] == 's':
                     flag = True
 
         # ground floor
         if way[i][0] == 'g':
-            if privius_point == 's' or privius_point == 'f':
+            if privius_point == 's' or privius_point == 'f' or privius_point == 't':
                 privius_point = way[i]
                 continue
 
@@ -65,7 +76,7 @@ def draw_by_points(way):
             # проверка на то находится ли следующая точка на другом этаже и рисовать линии не надо
 
             if i < (len(way) - 1):
-                if way[i+1][0] == 's' or way[i+1][0] == 'f':
+                if way[i+1][0] == 's' or way[i+1][0] == 'f' or way[i+1][0] == 't':
                     flag = True
 
 
@@ -77,13 +88,15 @@ def draw_by_points(way):
         else:
             privius_point = way[i]
 
-    ground_floor_name = f"media/generic_map/ground_flor{way_name}.jpg"
-    first_floor_name = f"media/generic_map/first_flor{way_name}.jpg"
-    second_floor_name = f"media/generic_map/second_flor{way_name}.jpg"
+    ground_floor_name = f"media/generic_map/{way_name}_ground_flor.jpg"
+    first_floor_name = f"media/generic_map/{way_name}_first_flor.jpg"
+    second_floor_name = f"media/generic_map/{way_name}_second_flor.jpg"
+    third_floor_name = f"media/generic_map/{way_name}_third_flor.jpg"
 
     grounnd_floor.save(ground_floor_name)
     first_floor.save(first_floor_name)
     second_floor.save(second_floor_name)
+    third_floor.save(third_floor_name)
 
 
 # points
@@ -176,7 +189,8 @@ coordinats = {
 
     # second floor
 
-    's1': [450, 2000],
+    's0': [300, 2500],
+    's1': [450, 1800],
     's2': [450, 1300],
     's3': [420, 1050],
     's4': [820, 1300],
@@ -225,8 +239,56 @@ coordinats = {
     's47': [9900, 1000],
     's48': [9700, 1500],
     's49': [9800, 1300],
+    's50': [600, 2500],
 
+    # third floor
+
+    't1': [300, 2500],
+    't2': [400, 1800],
+    't3': [450, 1300],
+    't4': [420, 1050],
+    't5': [820, 1300],
+    't6': [820, 1050],
+    't7': [1050, 1300],
+    't8': [1050, 1500],
+    't9': [1300, 1300],
+    't10': [1300, 1050],
+    't11': [2100, 1300],
+    't12': [2100, 1500],
+    't13': [2100, 1050],
+    't14': [2650, 1300],
+    't15': [2600, 1500],
+    't16': [2700, 1050],
+    't17': [3300, 1300],
+    't18': [3300, 1500],
+    't19': [3300, 1050],
+    't20': [3900, 1300],
+    't21': [3900, 1050],
+    't22': [4000, 1300],
+    't24': [4000, 1500],
+    't25': [5550, 1300],
+    't26': [5550, 1500],
+    't27': [5550, 500],
+    't28': [4800, 300],
+    't29': [6250, 1300],
+    't30': [6250, 1500],
+    't31': [6400, 1300],
+    't32': [6400, 1050],
+    't33': [6850, 1300],
+    't34': [6900, 1000],
+    't35': [6850, 1500],
+    't36': [7600, 1300],
+    't37': [7600, 1500],
+    't38': [8350, 1300],
+    't39': [8325, 1000],
+    't40': [8350, 1500],
+    't41': [9100, 1300],
+    't42': [9100, 1500],
+    't43': [9550, 1300],
+    't44': [9550, 1000],
+    't45': [9800, 1300],
+    't46': [9900, 1000],
 }
 
-
+#draw_by_points(['t45', 't46'])
 
